@@ -83,8 +83,7 @@
                 <!-- Navigation -->
                 <nav class="flex flex-wrap justify-start space-x-2 md:space-x-4 text-sm font-medium">
                     <a href="#banks-section" class="nav-link text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-2 rounded-md transition-colors">Banks</a>
-                    <a href="#fdr-calculator" class="nav-link text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-2 rounded-md transition-colors">FDR Calc</a>
-                    <a href="#loan-calculator" class="nav-link text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-2 rounded-md transition-colors">Loan Calc</a>
+                    <a href="#calculator-buttons" class="nav-link text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-2 rounded-md transition-colors">Calculators</a>
                     <a href="#" id="navAbout" class="nav-link text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-2 rounded-md transition-colors">About</a>
                 </nav>
 
@@ -117,115 +116,24 @@
                 </div>
             </section>
             
-            <!-- Calculators Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- FDR Calculator Section -->
-                <section id="fdr-calculator" class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl pt-8">
-                    <h2 id="fdr-heading" class="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">Fixed Deposit (FDR) Calculator</h2>
-                    <form id="fdrForm" class="space-y-4">
-                        
-                        <div>
-                            <label for="fdrBank" id="fdr-label-bank" class="block text-sm font-medium">Select Bank</label>
-                            <select id="fdrBank" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" disabled>
-                                <option value="" disabled selected>Loading...</option>
-                            </select>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="fdrAmount" id="fdr-label-amount" class="block text-sm font-medium">Deposit Amount (BDT)</label>
-                                <input type="number" id="fdrAmount" min="1000" required placeholder="e.g. 100000"
-                                    class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                            </div>
-                            <div>
-                                <label for="fdrPeriodType" id="fdr-label-period" class="block text-sm font-medium">Deposit Period</label>
-                                <select id="fdrPeriodType" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                                    <option value="3">3 Months</option>
-                                    <option value="6">6 Months</option>
-                                    <option value="12">12 Months</option>
-                                    <option value="custom">Custom Months</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="fdrCustomMonthsContainer" class="hidden">
-                            <label for="fdrCustomMonths" id="fdr-label-custom-months" class="block text-sm font-medium">Custom Months</label>
-                            <input type="number" id="fdrCustomMonths" min="1" max="60" placeholder="Enter number of months"
-                                class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                        </div>
-
-                        <div>
-                            <label for="fdrRateDisplay" id="fdr-label-rate" class="block text-sm font-medium">Annual Rate/Profit Rate (%)</label>
-                            <input type="text" id="fdrRateDisplay" readonly placeholder="Rate will appear here"
-                                class="w-full p-3 border rounded-xl bg-gray-100 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 cursor-not-allowed">
-                            <small id="fdr-rate-note" class="text-xs text-gray-500 dark:text-gray-400">Note: Rates are based on 12-month period if custom period is selected.</small>
-                        </div>
-
-                        <div class="flex items-center space-x-3 p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                            <input type="checkbox" id="fdrHasTIN" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="fdrHasTIN" id="fdr-label-tin" class="text-sm font-medium">I have a Tax Identification Number (TIN)</label>
-                        </div>
-
-                        <button type="submit" id="fdr-calculate-btn" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-colors">
-                            Calculate FDR Profit
-                        </button>
-                    </form>
-
-                    <!-- In-page FDR Error Display -->
-                    <div id="fdrError" class="mt-4 p-3 bg-red-100 text-red-700 rounded-xl hidden"></div>
-
+            <!-- Calculator Access Buttons -->
+            <div id="calculator-buttons" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- FDR Calculator Access Button -->
+                <section id="fdr-calculator" class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col justify-center items-center hover:shadow-3xl transition-shadow cursor-pointer" onclick="showCalculatorModal('fdr')">
+                    <i data-lucide="piggy-bank" class="w-12 h-12 text-green-600 dark:text-green-400 mb-4"></i>
+                    <h2 id="fdr-heading" class="text-2xl font-bold text-center text-blue-600 dark:text-blue-400">Fixed Deposit (FDR) Calculator</h2>
+                    <p id="fdr-description" class="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">Calculate your profit, tax, and effective return.</p>
                 </section>
 
-                <!-- Loan Calculator Section -->
-                <section id="loan-calculator" class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl pt-8">
-                    <h2 id="loan-heading" class="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">Loan (EMI) Calculator</h2>
-                    <form id="loanForm" class="space-y-4">
-                        
-                        <div>
-                            <label for="loanBank" id="loan-label-bank" class="block text-sm font-medium">Select Bank</label>
-                            <select id="loanBank" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" disabled>
-                                <option value="" disabled selected>Loading...</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="loanType" id="loan-label-type" class="block text-sm font-medium">Loan Type</label>
-                            <select id="loanType" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                                <option value="personal">Personal Loan</option>
-                                <option value="home">Home Loan</option>
-                                <option value="sme">SME Loan</option>
-                                <option value="custom">Other (Enter Custom Rate)</option>
-                            </select>
-                        </div>
-
-                        <div id="loanCustomRateContainer" class="hidden">
-                            <label for="loanCustomRate" id="loan-label-custom-rate" class="block text-sm font-medium">Custom Annual Rate (%)</label>
-                            <input type="number" id="loanCustomRate" min="0.01" step="0.01" placeholder="e.g. 10.50"
-                                class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="loanAmount" id="loan-label-amount" class="block text-sm font-medium">Loan Amount (BDT)</label>
-                                <input type="number" id="loanAmount" min="1000" required placeholder="e.g. 500000"
-                                    class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                            </div>
-                            <div>
-                                <label for="loanDuration" id="loan-label-duration" class="block text-sm font-medium">Duration (Years)</label>
-                                <input type="number" id="loanDuration" min="1" max="30" required placeholder="e.g. 5"
-                                    class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-                            </div>
-                        </div>
-                        
-                        <button type="submit" id="loan-calculate-btn" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-colors">
-                            Calculate Monthly EMI
-                        </button>
-                    </form>
-
-                    <!-- In-page Loan Error Display -->
-                    <div id="loanError" class="mt-4 p-3 bg-red-100 text-red-700 rounded-xl hidden"></div>
+                <!-- Loan Calculator Access Button -->
+                <section id="loan-calculator" class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col justify-center items-center hover:shadow-3xl transition-shadow cursor-pointer" onclick="showCalculatorModal('loan')">
+                    <i data-lucide="hand-coins" class="w-12 h-12 text-red-600 dark:text-red-400 mb-4"></i>
+                    <h2 id="loan-heading" class="text-2xl font-bold text-center text-blue-600 dark:text-blue-400">Loan (EMI) Calculator</h2>
+                    <p id="loan-description" class="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">Determine monthly installment (EMI) and total repayment.</p>
                 </section>
             </div>
+            
+            <!-- Original Calculator sections were here, now replaced by access buttons -->
         </div>
 
         <!-- Footer -->
@@ -258,7 +166,7 @@
             </div>
             <!-- Modal Content (Scrollable) -->
             <div id="modalContent" class="p-6 overflow-y-auto flex-grow space-y-4">
-                <!-- Dynamic content injected here -->
+                <!-- Dynamic content (form or results) injected here -->
             </div>
         </div>
     </div>
@@ -299,6 +207,7 @@
                 'card-full-rates-heading': 'All Rates & Details',
                 'card-bank-info-heading': 'Bank Information',
                 'fdr-heading': 'Fixed Deposit (FDR) Calculator',
+                'fdr-description': 'Calculate your profit, tax, and effective return.',
                 'fdr-label-bank': 'Select Bank',
                 'fdr-label-amount': 'Deposit Amount (BDT)',
                 'fdr-label-period': 'Deposit Period',
@@ -316,6 +225,7 @@
                 'fdr-result-final-label': 'Final Profit:',
                 'fdr-result-effective-label': 'Effective Annual Return:',
                 'loan-heading': 'Loan (EMI) Calculator',
+                'loan-description': 'Determine monthly installment (EMI) and total repayment.',
                 'loan-label-bank': 'Select Bank',
                 'loan-label-type': 'Loan Type',
                 'loan-type-personal': 'Personal Loan',
@@ -337,8 +247,8 @@
                 'error-custom-rate': 'Please enter a valid custom annual rate.',
                 'error-fetch-data': 'Could not fetch bank data from the external source. Please check your network or try again later.',
                 'loading-banks': 'Loading bank data... Please wait.',
-                'modal-title-fdr': 'FDR Profit Calculation Result',
-                'modal-title-loan': 'Loan EMI Calculation Result',
+                'modal-title-fdr': 'FDR Calculator',
+                'modal-title-loan': 'Loan EMI Calculator',
                 'modal-title-about': 'About bornosoftnr.com',
                 'modal-close': 'Close',
                 'about-content-heading': 'About This Product',
@@ -348,6 +258,9 @@
                 'about-disclaimer': 'Disclaimer: The data provided here are estimates for Oct-Nov 2025 based on market approximations and should always be verified with the official bank sources. bornosoftnr.com takes no responsibility for financial decisions made using this data.',
                 'fdr-explanation': 'Calculation is based on the flat interest method: Principal × Rate × (Months/12). Tax is applied to the gross profit.',
                 'loan-explanation': 'Calculation uses the standard Equated Monthly Installment (EMI) formula to determine the fixed monthly payment (principal + interest) over the entire loan term.',
+                'fdr-results-title': 'FDR Profit Calculation Result',
+                'loan-results-title': 'Loan EMI Calculation Result',
+                'calc-loading': 'Loading calculator...',
             },
             'bn': {
                 'header-title': 'বাংলাদেশ ব্যাংক তথ্য ও ক্যালকুলেটর ২০২৫',
@@ -377,6 +290,7 @@
                 'card-full-rates-heading': 'সমস্ত হার ও বিস্তারিত',
                 'card-bank-info-heading': 'ব্যাংক তথ্য',
                 'fdr-heading': 'ফিক্সড ডিপোজিট (FDR) ক্যালকুলেটর',
+                'fdr-description': 'আপনার লাভ, কর এবং কার্যকর রিটার্ন গণনা করুন।',
                 'fdr-label-bank': 'ব্যাংক নির্বাচন করুন',
                 'fdr-label-amount': 'ডিপোজিটের পরিমাণ (টাকা)',
                 'fdr-label-period': 'ডিপোজিটের সময়কাল',
@@ -394,6 +308,7 @@
                 'fdr-result-final-label': 'চূড়ান্ত লাভ:',
                 'fdr-result-effective-label': 'কার্যকরী বার্ষিক রিটার্ন:',
                 'loan-heading': 'ঋণ (ইএমআই) ক্যালকুলেটর',
+                'loan-description': 'মাসিক কিস্তি (ইএমআই) এবং মোট পরিশোধের পরিমাণ নির্ণয় করুন।',
                 'loan-label-bank': 'ব্যাংক নির্বাচন করুন',
                 'loan-label-type': 'ঋণের ধরণ',
                 'loan-type-personal': 'ব্যক্তিগত ঋণ',
@@ -415,8 +330,8 @@
                 'error-custom-rate': 'দয়া করে একটি বৈধ কাস্টম বার্ষিক হার লিখুন।',
                 'error-fetch-data': 'বাহ্যিক উৎস থেকে ব্যাংক ডেটা লোড করা সম্ভব হয়নি। আপনার নেটওয়ার্ক সংযোগ পরীক্ষা করুন অথবা পরে আবার চেষ্টা করুন।',
                 'loading-banks': 'ব্যাংক ডেটা লোড হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।',
-                'modal-title-fdr': 'এফডিআর লাভের হিসাবের ফলাফল',
-                'modal-title-loan': 'ঋণ ইএমআই হিসাবের ফলাফল',
+                'modal-title-fdr': 'এফডিআর ক্যালকুলেটর',
+                'modal-title-loan': 'ঋণ ইএমআই ক্যালকুলেটর',
                 'modal-title-about': 'bornosoftnr.com সম্পর্কে',
                 'modal-close': 'বন্ধ করুন',
                 'about-content-heading': 'এই পণ্য সম্পর্কে',
@@ -426,8 +341,116 @@
                 'about-disclaimer': 'অস্বীকৃতি: এখানে প্রদত্ত তথ্যগুলি বাজার অনুমানের ভিত্তিতে ২০২৫ সালের অক্টোবর-নভেম্বর মাসের আনুমানিক হার, যা সবসময় অফিসিয়াল ব্যাংক উৎস থেকে যাচাই করা উচিত। এই ডেটা ব্যবহার করে নেওয়া আর্থিক সিদ্ধান্তের জন্য bornosoftnr.com কোনো দায়বদ্ধতা নেয় না।',
                 'fdr-explanation': 'গণনা ফ্ল্যাট ইন্টারেস্ট পদ্ধতির উপর ভিত্তি করে: আসল $\times$ হার $\times$ (মাস/১২)। মোট লাভ থেকে কর কাটা হয়।',
                 'loan-explanation': 'গণনায় ঋণের পুরো মেয়াদের জন্য ফিক্সড মাসিক কিস্তি (আসল + সুদ) নির্ধারণ করতে স্ট্যান্ডার্ড ইকুয়েটেড মান্থলি ইনস্টলমেন্ট (EMI) সূত্র ব্যবহার করা হয়।',
+                'fdr-results-title': 'এফডিআর লাভের হিসাবের ফলাফল',
+                'loan-results-title': 'ঋণ ইএমআই হিসাবের ফলাফল',
+                'calc-loading': 'ক্যালকুলেটর লোড হচ্ছে...',
             }
         };
+
+        // --- Calculator Form Templates (Stored in JS for dynamic injection and localization) ---
+        function getFDRFormTemplate() {
+            return `
+                <form id="fdrForm" class="space-y-4">
+                    
+                    <div>
+                        <label for="fdrBank" id="fdr-label-bank" class="block text-sm font-medium">${getTranslation('fdr-label-bank')}</label>
+                        <select id="fdrBank" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" required>
+                            <option value="" disabled selected>${banks.length === 0 ? getTranslation('calc-loading') : getTranslation('fdr-label-bank')}</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="fdrAmount" id="fdr-label-amount" class="block text-sm font-medium">${getTranslation('fdr-label-amount')}</label>
+                            <input type="number" id="fdrAmount" min="1000" required placeholder="e.g. 100000"
+                                class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label for="fdrPeriodType" id="fdr-label-period" class="block text-sm font-medium">${getTranslation('fdr-label-period')}</label>
+                            <select id="fdrPeriodType" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                                <option value="3">${getTranslation('fdr-period-3')}</option>
+                                <option value="6">${getTranslation('fdr-period-6')}</option>
+                                <option value="12" selected>${getTranslation('fdr-period-12')}</option>
+                                <option value="custom">${getTranslation('fdr-period-custom')}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="fdrCustomMonthsContainer" class="hidden">
+                        <label for="fdrCustomMonths" id="fdr-label-custom-months" class="block text-sm font-medium">${getTranslation('fdr-label-custom-months')}</label>
+                        <input type="number" id="fdrCustomMonths" min="1" max="60" placeholder="Enter number of months"
+                            class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                    </div>
+
+                    <div>
+                        <label for="fdrRateDisplay" id="fdr-label-rate" class="block text-sm font-medium">${getTranslation('fdr-label-rate')}</label>
+                        <input type="text" id="fdrRateDisplay" readonly placeholder="Rate will appear here"
+                            class="w-full p-3 border rounded-xl bg-gray-100 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 cursor-not-allowed">
+                        <small id="fdr-rate-note" class="text-xs text-gray-500 dark:text-gray-400">${getTranslation('fdr-rate-note')}</small>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
+                        <input type="checkbox" id="fdrHasTIN" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="fdrHasTIN" id="fdr-label-tin" class="text-sm font-medium">${getTranslation('fdr-label-tin')}</label>
+                    </div>
+
+                    <button type="submit" id="fdr-calculate-btn" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-colors">
+                        ${getTranslation('fdr-calculate-btn')}
+                    </button>
+                </form>
+
+                <div id="fdrError" class="mt-4 p-3 bg-red-100 text-red-700 rounded-xl hidden"></div>
+            `;
+        }
+
+        function getLoanFormTemplate() {
+            return `
+                <form id="loanForm" class="space-y-4">
+                    
+                    <div>
+                        <label for="loanBank" id="loan-label-bank" class="block text-sm font-medium">${getTranslation('loan-label-bank')}</label>
+                        <select id="loanBank" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" required>
+                            <option value="" disabled selected>${banks.length === 0 ? getTranslation('calc-loading') : getTranslation('loan-label-bank')}</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="loanType" id="loan-label-type" class="block text-sm font-medium">${getTranslation('loan-label-type')}</label>
+                        <select id="loanType" class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                            <option value="personal">${getTranslation('loan-type-personal')}</option>
+                            <option value="home">${getTranslation('loan-type-home')}</option>
+                            <option value="sme">${getTranslation('loan-type-sme')}</option>
+                            <option value="custom">${getTranslation('loan-type-custom')}</option>
+                        </select>
+                    </div>
+
+                    <div id="loanCustomRateContainer" class="hidden">
+                        <label for="loanCustomRate" id="loan-label-custom-rate" class="block text-sm font-medium">${getTranslation('loan-label-custom-rate')}</label>
+                        <input type="number" id="loanCustomRate" min="0.01" step="0.01" placeholder="e.g. 10.50"
+                            class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="loanAmount" id="loan-label-amount" class="block text-sm font-medium">${getTranslation('loan-label-amount')}</label>
+                            <input type="number" id="loanAmount" min="1000" required placeholder="e.g. 500000"
+                                class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label for="loanDuration" id="loan-label-duration" class="block text-sm font-medium">${getTranslation('loan-label-duration')}</label>
+                            <input type="number" id="loanDuration" min="1" max="30" required placeholder="e.g. 5"
+                                class="w-full p-3 border rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="loan-calculate-btn" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-colors">
+                        ${getTranslation('loan-calculate-btn')}
+                    </button>
+                </form>
+
+                <div id="loanError" class="mt-4 p-3 bg-red-100 text-red-700 rounded-xl hidden"></div>
+            `;
+        }
 
         // Helper function for translating text
         function getTranslation(key) {
@@ -442,13 +465,14 @@
             document.getElementById('dark-mode-text').textContent = getTranslation('dark-mode-text');
             document.getElementById('banks-heading').textContent = getTranslation('banks-heading');
             document.getElementById('fdr-heading').textContent = getTranslation('fdr-heading');
+            document.getElementById('fdr-description').textContent = getTranslation('fdr-description');
             document.getElementById('loan-heading').textContent = getTranslation('loan-heading');
+            document.getElementById('loan-description').textContent = getTranslation('loan-description');
             document.getElementById('footer-text').innerHTML = getTranslation('footer-text');
             
             // Update nav links
             document.querySelector('a[href="#banks-section"]').textContent = getTranslation('nav-banks');
-            document.querySelector('a[href="#fdr-calculator"]').textContent = getTranslation('nav-fdr');
-            document.querySelector('a[href="#loan-calculator"]').textContent = getTranslation('nav-loan');
+            document.querySelector('a[href="#calculator-buttons"]').textContent = getTranslation('nav-fdr') + " / " + getTranslation('nav-loan');
             document.getElementById('navAbout').textContent = getTranslation('nav-about');
 
             // Update Filter Dropdown
@@ -459,32 +483,6 @@
             typeFilter.options[3].textContent = getTranslation('filter-islamic');
             typeFilter.options[4].textContent = getTranslation('filter-specialized');
             typeFilter.options[5].textContent = getTranslation('filter-foreign');
-
-            // Update FDR Calculator Labels/Buttons
-            document.getElementById('fdr-label-bank').textContent = getTranslation('fdr-label-bank');
-            document.getElementById('fdr-label-amount').textContent = getTranslation('fdr-label-amount');
-            document.getElementById('fdr-label-period').textContent = getTranslation('fdr-label-period');
-            document.getElementById('fdrPeriodType').options[0].textContent = getTranslation('fdr-period-3');
-            document.getElementById('fdrPeriodType').options[1].textContent = getTranslation('fdr-period-6');
-            document.getElementById('fdrPeriodType').options[2].textContent = getTranslation('fdr-period-12');
-            document.getElementById('fdrPeriodType').options[3].textContent = getTranslation('fdr-period-custom');
-            document.getElementById('fdr-label-custom-months').textContent = getTranslation('fdr-label-custom-months');
-            document.getElementById('fdr-label-rate').textContent = getTranslation('fdr-label-rate');
-            document.getElementById('fdr-rate-note').textContent = getTranslation('fdr-rate-note');
-            document.getElementById('fdr-label-tin').textContent = getTranslation('fdr-label-tin');
-            document.getElementById('fdr-calculate-btn').textContent = getTranslation('fdr-calculate-btn');
-            
-            // Update Loan Calculator Labels/Buttons
-            document.getElementById('loan-label-bank').textContent = getTranslation('loan-label-bank');
-            document.getElementById('loan-label-type').textContent = getTranslation('loan-label-type');
-            document.getElementById('loanType').options[0].textContent = getTranslation('loan-type-personal');
-            document.getElementById('loanType').options[1].textContent = getTranslation('loan-type-home');
-            document.getElementById('loanType').options[2].textContent = getTranslation('loan-type-sme');
-            document.getElementById('loanType').options[3].textContent = getTranslation('loan-type-custom');
-            document.getElementById('loan-label-custom-rate').textContent = getTranslation('loan-label-custom-rate');
-            document.getElementById('loan-label-amount').textContent = getTranslation('loan-label-amount');
-            document.getElementById('loan-label-duration').textContent = getTranslation('loan-label-duration');
-            document.getElementById('loan-calculate-btn').textContent = getTranslation('loan-calculate-btn');
 
             // Re-render banks to update card details
             filterAndRender(); 
@@ -742,33 +740,77 @@
             showModal('modal-title-about', contentHTML, true); 
         }
 
+        // --- Dynamic Calculator Loader and Events ---
+
+        window.showCalculatorModal = function(type) {
+            if (banks.length === 0) {
+                // Should be prevented by fetch, but for safety:
+                alert('Bank data is still loading. Please wait a moment.');
+                return;
+            }
+
+            const titleKey = type === 'fdr' ? 'modal-title-fdr' : 'modal-title-loan';
+            const formTemplate = type === 'fdr' ? getFDRFormTemplate() : getLoanFormTemplate();
+
+            showModal(titleKey, formTemplate, false);
+            attachCalculatorEvents(type);
+        }
+
+        function attachCalculatorEvents(type) {
+            if (type === 'fdr') {
+                populateFDRSelects();
+                document.getElementById('fdrForm').addEventListener('submit', calculateFDR);
+                document.getElementById('fdrBank').addEventListener('change', updateFDRRateDisplay);
+                document.getElementById('fdrPeriodType').addEventListener('change', (e) => {
+                    const container = document.getElementById('fdrCustomMonthsContainer');
+                    if (e.target.value === 'custom') {
+                        container.classList.remove('hidden');
+                    } else {
+                        container.classList.add('hidden');
+                    }
+                    updateFDRRateDisplay();
+                });
+                updateFDRRateDisplay(); // Initial rate load
+            } else if (type === 'loan') {
+                populateLoanSelects();
+                document.getElementById('loanForm').addEventListener('submit', calculateLoanEMI);
+                document.getElementById('loanType').addEventListener('change', handleLoanTypeChange);
+                handleLoanTypeChange(); // Initial custom rate check
+            }
+        }
+
         // --- Calculator Utility Functions ---
 
-        /**
-         * Populates the bank select dropdowns (FDR and Loan)
-         */
-        function populateBankSelects() {
+        function populateFDRSelects() {
             const fdrSelect = document.getElementById('fdrBank');
-            const loanSelect = document.getElementById('loanBank');
-            
-            fdrSelect.innerHTML = '';
-            loanSelect.innerHTML = '';
+            // Clear current options
+            fdrSelect.innerHTML = '<option value="" disabled selected>' + getTranslation('fdr-label-bank') + '</option>';
 
             banks.forEach((bank, index) => {
                 const option = document.createElement('option');
                 option.value = index;
                 option.textContent = bank.name;
-                
-                fdrSelect.appendChild(option.cloneNode(true));
-                loanSelect.appendChild(option.cloneNode(true));
+                fdrSelect.appendChild(option);
             });
             
-            // Enable selects after loading
-            fdrSelect.disabled = false;
-            loanSelect.disabled = false;
+            // Set default selection to the first available bank
+            if (banks.length > 0) fdrSelect.value = 0;
+        }
+
+        function populateLoanSelects() {
+            const loanSelect = document.getElementById('loanBank');
+            // Clear current options
+            loanSelect.innerHTML = '<option value="" disabled selected>' + getTranslation('loan-label-bank') + '</option>';
+
+            banks.forEach((bank, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = bank.name;
+                loanSelect.appendChild(option);
+            });
             
-            // Trigger rate update after population
-            updateFDRRateDisplay();
+            // Set default selection to the first available bank
+            if (banks.length > 0) loanSelect.value = 0;
         }
 
         // --- Asynchronous Data Fetching ---
@@ -790,7 +832,6 @@
                 banks = data.banks;
 
                 // Continue initialization after data is loaded
-                populateBankSelects();
                 updateUIForLanguage();
                 // Hide loading message now that rendering is starting
                 loadingMessage.classList.add('hidden');
@@ -800,10 +841,6 @@
                 // Display error message
                 loadingMessage.textContent = getTranslation('error-fetch-data');
                 loadingMessage.classList.add('p-3', 'bg-red-100', 'text-red-700', 'rounded-xl', 'border-red-400');
-                
-                // Clear dropdowns and disable inputs on error
-                document.getElementById('fdrBank').innerHTML = '<option value="" disabled selected>Data Load Failed</option>';
-                document.getElementById('loanBank').innerHTML = '<option value="" disabled selected>Data Load Failed</option>';
             }
         }
 
@@ -811,7 +848,10 @@
         // --- FDR Calculator Logic ---
 
         function updateFDRRateDisplay() {
-            const bankIndex = document.getElementById('fdrBank').value;
+            const fdrSelect = document.getElementById('fdrBank');
+            if (!fdrSelect) return; // Guard if not in modal
+            
+            const bankIndex = fdrSelect.value;
             const bank = banks[bankIndex];
             const period = document.getElementById('fdrPeriodType').value;
             const rateInput = document.getElementById('fdrRateDisplay');
@@ -865,16 +905,13 @@
             }
 
             // Calculation Logic
-            // profit_before_tax = amount * (rate/100) * (months / 12)
             const profitBeforeTax = amount * (rate / 100) * (months / 12);
             
-            // tax = profit_before_tax * (hasTIN ? 0.10 : 0.15)
             const taxRate = hasTIN ? 0.10 : 0.15;
             const tax = profitBeforeTax * taxRate;
             
             const profitAfterTax = profitBeforeTax - tax;
             
-            // Effective return calculation: (profitAfterTax / amount) * (12 / months) * 100
             const effectiveReturn = (profitAfterTax / amount) * (12 / months) * 100;
 
             const periodDisplay = periodType === 'custom' ? `${months} ${getTranslation('fdr-period-custom').toLowerCase()}` : document.getElementById('fdrPeriodType').options[document.getElementById('fdrPeriodType').selectedIndex].text;
@@ -885,9 +922,9 @@
                 <h4 class="text-lg font-bold text-blue-600 dark:text-blue-400 mb-4">${bankName} - FDR Summary</h4>
 
                 <div class="space-y-3 p-4 border rounded-xl bg-gray-50 dark:bg-gray-700">
-                    <div class="flex justify-between text-sm"><span>Deposit Amount:</span> <span class="font-semibold">${formatBDT(amount)}</span></div>
-                    <div class="flex justify-between text-sm"><span>Investment Period:</span> <span class="font-semibold">${periodDisplay}</span></div>
-                    <div class="flex justify-between text-sm border-t pt-1 border-gray-200 dark:border-gray-600"><span>Annual Rate Applied:</span> <span class="font-semibold text-green-600 dark:text-green-400">${rate.toFixed(2)}%</span></div>
+                    <div class="flex justify-between text-sm"><span>${getTranslation('fdr-label-amount')}:</span> <span class="font-semibold">${formatBDT(amount)}</span></div>
+                    <div class="flex justify-between text-sm"><span>${getTranslation('fdr-label-period')}:</span> <span class="font-semibold">${periodDisplay}</span></div>
+                    <div class="flex justify-between text-sm border-t pt-1 border-gray-200 dark:border-gray-600"><span>${getTranslation('fdr-label-rate')}:</span> <span class="font-semibold text-green-600 dark:text-green-400">${rate.toFixed(2)}%</span></div>
                 </div>
                 
                 <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md space-y-3 mt-4">
@@ -916,8 +953,10 @@
                 </div>
             `;
             
-            // Show Modal
-            showModal('modal-title-fdr', resultsHTML);
+            // Show Modal with Results
+            document.getElementById('modalTitle').textContent = getTranslation('fdr-results-title');
+            document.getElementById('modalContent').innerHTML = resultsHTML;
+            lucide.createIcons();
         }
 
         // --- Loan Calculator Logic ---
@@ -1018,9 +1057,9 @@
                 <h4 class="text-lg font-bold text-blue-600 dark:text-blue-400 mb-4">${bankName} - Loan EMI Summary</h4>
 
                 <div class="space-y-3 p-4 border rounded-xl bg-gray-50 dark:bg-gray-700">
-                    <div class="flex justify-between text-sm"><span>Loan Type:</span> <span class="font-semibold">${loanTypeDisplay}</span></div>
-                    <div class="flex justify-between text-sm"><span>Loan Principal:</span> <span class="font-semibold">${formatBDT(principal)}</span></div>
-                    <div class="flex justify-between text-sm"><span>Duration:</span> <span class="font-semibold">${durationDisplay}</span></div>
+                    <div class="flex justify-between text-sm"><span>${getTranslation('loan-label-type')}:</span> <span class="font-semibold">${loanTypeDisplay}</span></div>
+                    <div class="flex justify-between text-sm"><span>${getTranslation('loan-label-amount')}:</span> <span class="font-semibold">${formatBDT(principal)}</span></div>
+                    <div class="flex justify-between text-sm"><span>${getTranslation('loan-label-duration')}:</span> <span class="font-semibold">${durationDisplay}</span></div>
                     <div class="flex justify-between text-sm border-t pt-1 border-gray-200 dark:border-gray-600"><span>Annual Rate Applied:</span> <span class="font-semibold text-red-600 dark:text-red-400">${annualRate.toFixed(2)}%</span></div>
                 </div>
 
@@ -1045,8 +1084,10 @@
                 </div>
             `;
             
-            // Show Modal
-            showModal('modal-title-loan', resultsHTML);
+            // Show Modal with Results
+            document.getElementById('modalTitle').textContent = getTranslation('loan-results-title');
+            document.getElementById('modalContent').innerHTML = resultsHTML;
+            lucide.createIcons();
         }
 
         // 4. Filtering and Searching (Moved here to use its definition in updateUIForLanguage)
@@ -1088,28 +1129,8 @@
             document.getElementById('searchBar').addEventListener('input', filterAndRender);
             document.getElementById('typeFilter').addEventListener('change', filterAndRender);
             
-            // 5. FDR Calculator Listeners
-            document.getElementById('fdrBank').addEventListener('change', updateFDRRateDisplay);
-            document.getElementById('fdrPeriodType').addEventListener('change', (e) => {
-                const container = document.getElementById('fdrCustomMonthsContainer');
-                if (e.target.value === 'custom') {
-                    container.classList.remove('hidden');
-                } else {
-                    container.classList.add('hidden');
-                }
-                updateFDRRateDisplay();
-            });
-            document.getElementById('fdrForm').addEventListener('submit', calculateFDR);
-
-            // 6. Loan Calculator Listeners
-            document.getElementById('loanType').addEventListener('change', handleLoanTypeChange);
-            document.getElementById('loanForm').addEventListener('submit', calculateLoanEMI);
-
-            // 7. About Modal Listener (Custom Function)
+            // 5. About Modal Listener (Custom Function)
             document.getElementById('navAbout').addEventListener('click', showAboutModal);
-
-            // Initial custom rate check for loan calculator
-            handleLoanTypeChange();
         });
     </script>
 </body>
